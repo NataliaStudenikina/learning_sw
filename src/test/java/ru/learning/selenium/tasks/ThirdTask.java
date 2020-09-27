@@ -13,6 +13,5 @@ public class ThirdTask extends TestBase {
         driver.findElement(By.name("username")).sendKeys(LOGIN_DETAILS);
         driver.findElement(By.name("password")).sendKeys(LOGIN_DETAILS);
         driver.findElement(By.name("login")).click();
-        Thread.sleep(1000);
     }
 }
