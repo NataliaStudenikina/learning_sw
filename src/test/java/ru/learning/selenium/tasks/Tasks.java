@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
-public class ThirdTask extends TestBase {
+public class Tasks extends TestBase {
 
     public static final String LOGIN_DETAILS ="admin";
     public static final String LOCAL_HOST = "http://192.168.64.2/public_html/admin/";
