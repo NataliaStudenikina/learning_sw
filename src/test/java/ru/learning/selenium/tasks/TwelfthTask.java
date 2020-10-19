@@ -5,6 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class TwelfthTask extends TestBase {
 
     private final String PAGE_GOODS =  "http://192.168.64.2/public_html/admin/?app=catalog&doc=catalog/";
@@ -20,7 +26,7 @@ public class TwelfthTask extends TestBase {
         clickOnElement("//input[@name='product_groups[]']");
         fillField("quantity","4");
         selectValueFromBox("sold_out_status_id","Temporary sold out");
-        attachFile("new_images[]","/Users/ruasunp/Documents/Platform/Dev/training/learning_sw/src/main/resources/picture/dog.jpg");
+        attachFile("new_images[]");
         fillField("date_valid_from","07102020");
         fillField("date_valid_to","07122020");
         clickOnElement(".//a[text()='Information']");
@@ -45,13 +51,12 @@ public class TwelfthTask extends TestBase {
         fillField("campaigns[new_1][USD]","08");
         fillField("campaigns[new_1][EUR]","05");
         clickOnElement("//button[@name='save']");
-
-
     }
 
-    public void attachFile( String elementName, String file) {
+    public void attachFile( String elementName) {
+        String path = new File("src/main/resources/picture/dog.jpg").getAbsolutePath();
         WebElement webElement = getWebElement(elementName);
-        webElement.sendKeys(file);
+        webElement.sendKeys(path);
     }
 
     private void selectValueFromBox(String elementName, String value) {
@@ -62,22 +67,14 @@ public class TwelfthTask extends TestBase {
 
     private void clickOnElement(String pathToElement){
         driver.findElement(By.xpath(pathToElement)).click();
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Something wrong with thread sleep");
-        }
+        sleep(50);
     }
 
     private void fillField(String elementName, String value) {
         WebElement webElement = getWebElement(elementName);
         webElement.clear();
         webElement.sendKeys( value );
-        try {
-            Thread.sleep(400);
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Something wrong with thread sleep");
-        }
+        sleep(400);
     }
 
 
@@ -85,15 +82,19 @@ public class TwelfthTask extends TestBase {
         WebElement webElement = driver.findElement(By.xpath(pathToElement));
         webElement.clear();
         webElement.sendKeys( value );
-        try {
-            Thread.sleep(400);
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Something wrong with thread sleep");
-        }
+        sleep(400);
     }
 
     private WebElement getWebElement(String elementName) {
         return driver.findElement(By.name(elementName));
+    }
+
+    private void sleep(Integer second){
+        try {
+            Thread.sleep(second);
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Something wrong with thread sleep");
+        }
     }
 
 }
