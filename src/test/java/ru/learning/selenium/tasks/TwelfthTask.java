@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import java.io.File;
 
 public class TwelfthTask extends TestBase {
 
@@ -49,7 +48,7 @@ public class TwelfthTask extends TestBase {
     }
 
     public void attachFile( String elementName) {
-        String path = new File("src/main/resources/picture/dog.jpg").getAbsolutePath();
+        String path = getClass().getResource("/picture/dog.jpg").getPath();
         WebElement webElement = getWebElement(elementName);
         webElement.sendKeys(path);
     }
