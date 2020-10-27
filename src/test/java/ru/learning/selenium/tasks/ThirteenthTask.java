@@ -20,7 +20,7 @@ public class ThirteenthTask extends TestBase{
         addItemToCart("2");
         addItemToCart("3");
         clickOnElement(".//a[text()='Checkout »']");
-        deleteItems(3);
+        deleteItems();
     }
 
     private void addItemToCart(String numberItem) {
@@ -28,11 +28,12 @@ public class ThirteenthTask extends TestBase{
         clickOnElement(".//button[@name='add_cart_product']");
         waitRenewalCart(numberItem);
         clickOnElement(".//i[@class='fa fa-home']");
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
-
-    private void deleteItems(Integer count) {
-        for (int i = 0; i < count; i++){
+    private void deleteItems() {
+        int count = driver.findElements(By.xpath(".//div[@class='viewport']//li")).size();
+        for (int i = 1; i <= count; i++) {
             WebElement element = driver.findElement(By.xpath(".//div[@id='order_confirmation-wrapper']//td[3]"));
             clickOnElement(".//button[@name='remove_cart_item']");
             driver.navigate().refresh();
@@ -41,36 +42,28 @@ public class ThirteenthTask extends TestBase{
     }
 
     private void waitRenewalCart(String quantity) {
-        int refreshCount = 10;
         String element = driver.findElement(By.xpath(".//span[@class='quantity']")).getText();
-        for (int i = 0; i < refreshCount; i++) {
-            if (element.equals(quantity)) {
-            } else {
+        while(element.equals(quantity)) {
                 driver.navigate().refresh();
-                new WebDriverWait(driver, 20/*seconds*/);
+                new WebDriverWait(driver, 32);
             }
         }
-    }
 
     private void clickOnElement(String pathToElement){
         driver.findElement(By.xpath(pathToElement)).click();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         clickOnAAlert();
     }
 
     private void clickOnAAlert() {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 3);
-            wait.until(ExpectedConditions.alertIsPresent());
+            new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
             Alert alert = driver.switchTo().alert();
             alert.accept();
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
     }
 
     private void clickFirstElement() {
         driver.findElement(By.xpath(".//div[@class='image-wrapper']")).click();
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     }
 
 }
