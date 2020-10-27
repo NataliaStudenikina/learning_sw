@@ -45,7 +45,7 @@ public class ThirteenthTask extends TestBase{
         String element = driver.findElement(By.xpath(".//span[@class='quantity']")).getText();
         while(element.equals(quantity)) {
                 driver.navigate().refresh();
-                new WebDriverWait(driver, 32);
+                new WebDriverWait(driver, 30);
             }
         }
 
