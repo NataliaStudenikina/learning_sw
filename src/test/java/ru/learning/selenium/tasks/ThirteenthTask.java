@@ -15,7 +15,6 @@ public class ThirteenthTask extends TestBase{
     @Test
     public void checkCart() throws InterruptedException{
         openPage(PAGE_GOODS);
-        clickFirstElement();
         addItemToCart("1");
         addItemToCart("2");
         addItemToCart("3");
