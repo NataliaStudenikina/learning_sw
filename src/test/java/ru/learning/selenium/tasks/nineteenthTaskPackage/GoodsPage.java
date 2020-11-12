@@ -30,11 +30,10 @@ public class GoodsPage extends TestBase {
         }
     }
 
-    public GoodsPage addItemsToCart(Integer numberGood) {
+    public void addItemsToCart(Integer numberGood) {
         for (int i = 1; i <= numberGood; i++){
             addItemToCart(i);
         }
-        return this;
     }
 
     public void goToCart(){
